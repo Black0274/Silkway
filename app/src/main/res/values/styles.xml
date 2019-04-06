@@ -25,4 +25,10 @@
         <item name="colorControlActivated">@color/DodgerBlue</item>
     </style>
 
+    <style name="MyButton" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/PowdedBlue</item>
+        <item name="colorButtonNormal">@color/DodgerBlue</item>
+
+    </style>
+
 </resources>

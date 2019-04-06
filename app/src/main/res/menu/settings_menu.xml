@@ -7,7 +7,8 @@
         android:id="@+id/item_add_place"
         android:icon="@drawable/baseline_add_location_white_36"
         android:title="@string/add_place_item"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="ifRoom"
+        android:onClick="add_place_click"/>
 
     <item
         android:id="@+id/item_settings"

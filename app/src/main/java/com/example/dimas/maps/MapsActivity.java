@@ -1,58 +1,41 @@
 package com.example.dimas.maps;
 
 import android.Manifest;
-import android.annotation.TargetApi;
-import android.app.Activity;
-import android.app.AlertDialog;
-import android.app.Dialog;
-import android.app.FragmentManager;
-import android.content.DialogInterface;
 import android.content.pm.ActivityInfo;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
-import android.os.Build;
-import android.support.annotation.NonNull;
 import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.PopupWindow;
-import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import android.widget.Toolbar;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
 import com.google.maps.DirectionsApi;
 import com.google.maps.DirectionsApiRequest;
 import com.google.maps.GeoApiContext;
-import com.google.maps.GeocodingApi;
 import com.google.maps.model.DirectionsLeg;
 import com.google.maps.model.DirectionsResult;
 import com.google.maps.model.DirectionsRoute;
 import com.google.maps.model.DirectionsStep;
 import com.google.maps.model.EncodedPolyline;
 
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener {
+public class MapsActivity extends AppCompatActivity implements OnMapReadyCallback, GoogleMap.OnMapLongClickListener,
+        SettingsInterface {
 
     private GoogleMap mMap;
     private String TAG = "MapsProj";
@@ -61,15 +44,21 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     private static final int SETTINGS_ID = 1;
     private static final int ADD_PLACE_ID = 2;
 
-    private int tolerance = 300;
     private String apiKey = "AIzaSyBNDPZA0lCPtjD-C_BYit46hoIVqrEulV0";
     private android.support.v7.widget.Toolbar toolbar;
     private TextView countKm;
     private SeekBar seekBar;
-    private int count = 0;
     private LatLng source;
     private LatLng destination;
     private MenuItem settings;
+
+    private int tolerance = 300;
+    private int countClick = 0;
+    private int countDistance = 100;
+    private boolean mode = true;   // true - all places
+    private boolean add_place_flag = false;
+    private ArrayList<LatLng> route;
+    private ArrayList<LatLng> places;
 
 
     @Override
@@ -82,6 +71,8 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
         setSupportActionBar(toolbar);
         settings = findViewById(R.id.item_settings);
 
+        route = new ArrayList();
+        places = new ArrayList<>();
 
         if (!isPermissionGranted(ACCESS_FINE_LOCATION_PERMISSION))
             ActivityCompat.requestPermissions(this, new String[] {
@@ -113,55 +104,64 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
 
     @Override
     public void onMapLongClick(LatLng latLng){
-            count += 1;
-            if (count == 1) {
-                destination = latLng;
-                mMap.addMarker(new MarkerOptions().position(destination).title(destination.toString()));
-            } else {
-                source = destination;
-                destination = latLng;
-                mMap.addMarker(new MarkerOptions().position(destination).title(destination.toString()));
+        if (add_place_flag){
+            places.add(latLng);
+            mMap.addMarker(new MarkerOptions().position(latLng).title(latLng.toString()));
+            add_place_flag = false;
+            Toast.makeText(this, String.valueOf(places.size()), Toast.LENGTH_LONG).show();
+        } else
+            buildRoute(latLng);
+    }
 
-                List<LatLng> path = new ArrayList();
+    private void buildRoute(LatLng latLng){
+        countClick += 1;
+        if (countClick == 1) {
+            destination = latLng;
+            mMap.addMarker(new MarkerOptions().position(destination).title(destination.toString())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
+        } else {
+            source = destination;
+            destination = latLng;
+            mMap.addMarker(new MarkerOptions().position(destination).title(destination.toString())
+                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)));
 
-                GeoApiContext context = new GeoApiContext.Builder()
-                        .apiKey(apiKey)
-                        .build();
-                DirectionsApiRequest req = DirectionsApi.getDirections(context, source.latitude + "," + source.longitude,
-                        destination.latitude + "," + destination.longitude);
+            GeoApiContext context = new GeoApiContext.Builder()
+                    .apiKey(apiKey)
+                    .build();
+            DirectionsApiRequest req = DirectionsApi.getDirections(context, source.latitude + "," + source.longitude,
+                    destination.latitude + "," + destination.longitude);
 
-                try {
-                    DirectionsResult res = req.await();
+            try {
+                DirectionsResult res = req.await();
 
-                    if (res.routes != null && res.routes.length > 0) {
-                        DirectionsRoute route = res.routes[0];
+                if (res.routes != null && res.routes.length > 0) {
+                    DirectionsRoute route = res.routes[0];
 
-                        if (route.legs != null) {
-                            for (int i = 0; i < route.legs.length; i++) {
-                                DirectionsLeg leg = route.legs[i];
-                                if (leg.steps != null) {
-                                    for (int j = 0; j < leg.steps.length; j++) {
-                                        DirectionsStep step = leg.steps[j];
-                                        if (step.steps != null && step.steps.length > 0) {
-                                            for (int k = 0; k < step.steps.length; k++) {
-                                                DirectionsStep step1 = step.steps[k];
-                                                EncodedPolyline points1 = step1.polyline;
-                                                if (points1 != null) {
-                                                    //Decode polyline and add points to list of route coordinates
-                                                    List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
-                                                    for (com.google.maps.model.LatLng coord1 : coords1) {
-                                                        path.add(new LatLng(coord1.lat, coord1.lng));
-                                                    }
+                    if (route.legs != null) {
+                        for (int i = 0; i < route.legs.length; i++) {
+                            DirectionsLeg leg = route.legs[i];
+                            if (leg.steps != null) {
+                                for (int j = 0; j < leg.steps.length; j++) {
+                                    DirectionsStep step = leg.steps[j];
+                                    if (step.steps != null && step.steps.length > 0) {
+                                        for (int k = 0; k < step.steps.length; k++) {
+                                            DirectionsStep step1 = step.steps[k];
+                                            EncodedPolyline points1 = step1.polyline;
+                                            if (points1 != null) {
+                                                //Decode polyline and add points to list of route coordinates
+                                                List<com.google.maps.model.LatLng> coords1 = points1.decodePath();
+                                                for (com.google.maps.model.LatLng coord1 : coords1) {
+                                                    this.route.add(new LatLng(coord1.lat, coord1.lng));
                                                 }
                                             }
-                                        } else {
-                                            EncodedPolyline points = step.polyline;
-                                            if (points != null) {
-                                                //Decode polyline and add points to list of route coordinates
-                                                List<com.google.maps.model.LatLng> coords = points.decodePath();
-                                                for (com.google.maps.model.LatLng coord : coords) {
-                                                    path.add(new LatLng(coord.lat, coord.lng));
-                                                }
+                                        }
+                                    } else {
+                                        EncodedPolyline points = step.polyline;
+                                        if (points != null) {
+                                            //Decode polyline and add points to list of route coordinates
+                                            List<com.google.maps.model.LatLng> coords = points.decodePath();
+                                            for (com.google.maps.model.LatLng coord : coords) {
+                                                this.route.add(new LatLng(coord.lat, coord.lng));
                                             }
                                         }
                                     }
@@ -169,19 +169,17 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
                             }
                         }
                     }
-                } catch (Exception ex) {
-                    Log.e(TAG, ex.getLocalizedMessage());
                 }
-
-                if (path.size() > 0) {
-                    PolylineOptions opts = new PolylineOptions().addAll(path).color(Color.BLUE).width(6);
-                    mMap.addPolyline(opts);
-                }
+            } catch (Exception ex) {
+                Log.e(TAG, ex.getLocalizedMessage());
             }
 
-
-
-        mMap.addMarker(new MarkerOptions().position(latLng).title(latLng.toString()));
+            if (route.size() > 0) {
+                PolylineOptions opts = new PolylineOptions().addAll(route).color(Color.BLUE).width(6);
+                mMap.addPolyline(opts);
+            }
+        }
+       // mMap.addMarker(new MarkerOptions().position(latLng).title(latLng.toString()));
     }
 
     @Override
@@ -191,31 +189,31 @@ public class MapsActivity extends AppCompatActivity implements OnMapReadyCallbac
     }
 
 
+
     public void settings_click(MenuItem item) {
-        //Toast.makeText(this,"SETTINGS CHOSEN", Toast.LENGTH_LONG).show();
         android.support.v4.app.FragmentManager manager = getSupportFragmentManager();
         Settings settings = new Settings();
-        String s = "settings";
         settings.show(manager, "settings");
 
-        //showDialog(SETTINGS_ID);
+        SettingsInterface activity = (SettingsInterface) settings;
+
+        try {
+            activity.stopSettings(mode, countDistance);
+        } catch (Exception e) {
+            Log.e(TAG, e.getLocalizedMessage());
+            e.printStackTrace();
+        }
     }
 
-   /* @Override
-    protected Dialog onCreateDialog(int id) {
-        switch (id) {
-            case SETTINGS_ID:
-                AlertDialog.Builder builder = new AlertDialog.Builder(MapsActivity.this);
-                LayoutInflater inflater = MapsActivity.this.getLayoutInflater();
-                View view = inflater.inflate(R.layout.popup, null);
-                builder.setView(view);
-                countKm = findViewById(R.id.countKm);
-                seekBar = findViewById(R.id.seekBar);
-                return builder.create();
-            default:
-                return null;
-        }
-    } */
+    @Override
+    public void stopSettings(boolean rb_changer, int count) {
+        mode = rb_changer;
+        countDistance = count;
+        //Toast.makeText(this, String.valueOf(countDistance) + " --M", Toast.LENGTH_LONG).show();
+    }
 
-
+    public void add_place_click(MenuItem item) {
+        add_place_flag = true;
+        Toast.makeText(this, "Удерживайте палец на карте чтобы добавить новое место", Toast.LENGTH_LONG).show();
+    }
 }
