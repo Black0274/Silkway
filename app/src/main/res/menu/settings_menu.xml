@@ -8,12 +8,20 @@
         android:icon="@drawable/baseline_add_location_white_36"
         android:title="@string/add_place_item"
         app:showAsAction="ifRoom"
-        android:onClick="add_place_click"/>
+        android:onClick="addPlaceClick"/>
+
+    <item
+        android:id="@+id/item_delete_place"
+        android:icon="@drawable/baseline_delete_forever_white_36"
+        android:title="@string/delete_place_item"
+        app:showAsAction="ifRoom"
+        android:onClick="deletePlaceClick"
+        />
 
     <item
         android:id="@+id/item_settings"
         android:icon="@drawable/baseline_settings_white_36"
         android:title="@string/settings_item"
         app:showAsAction="ifRoom"
-        android:onClick="settings_click"/>
+        android:onClick="settingsClick"/>
 </menu>

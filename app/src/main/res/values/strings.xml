@@ -1,8 +1,9 @@
 <resources>
     <string name="app_name">Silkway</string>
-    <string name="title_activity_maps">Map</string>
-    <string name="add_place_item">add_place</string>
-    <string name="settings_item">settings</string>
+    <string name="title_activity_maps">Silkway</string>
+    <string name="add_place_item">Добавить место</string>
+    <string name="delete_place_item">Удалить место</string>
+    <string name="settings_item">Настройки</string>
     <string name="popup_title">Отображение объектов:</string>
     <string name="all_places_item">На всей карте</string>
     <string name="on_distance_item">На расстоянии от маршрута</string>

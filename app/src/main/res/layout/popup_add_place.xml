@@ -1,0 +1,82 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/popup_text_view"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="        Введите текст        "
+                android:textSize="20sp"
+                android:gravity="center"
+                android:layout_marginStart="10dp"
+                android:layout_marginBottom="8dp"
+                android:textColor="@color/Black"/>
+
+            <TextView
+                android:id="@+id/textViewName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="2dp"
+                android:layout_marginTop="5dp"
+                android:text="Название места:"
+                android:textSize="15sp"
+                android:textColor="@color/Black"/>
+
+            <EditText
+                android:id="@+id/editTextName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:backgroundTint= "@color/DodgerBlue"
+                android:textCursorDrawable="@drawable/color_cursor" >
+            </EditText>
+
+            <TextView
+                android:id="@+id/textViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="2dp"
+                android:text="Описание:"
+                android:textSize="15sp"
+                android:textColor="@color/Black" />
+
+            <EditText
+                android:id="@+id/editTextDescription"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:imeOptions="actionDone"
+                android:inputType="textPersonName"
+                android:backgroundTint= "@color/DodgerBlue"
+                android:textCursorDrawable="@drawable/color_cursor">
+            </EditText>
+
+            <Button
+                android:id="@+id/OK_Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center_horizontal"
+                android:theme="@style/MyButton"
+                android:textColor="@color/White"
+                android:text="OK" />
+
+        </RadioGroup>
+
+</LinearLayout>

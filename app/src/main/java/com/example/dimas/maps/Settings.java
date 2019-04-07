@@ -9,14 +9,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
-/**
- * Created by Dimas on 31.03.2019.
- */
 
 public class Settings extends AppCompatDialogFragment implements SettingsInterface {
 
@@ -25,21 +21,25 @@ public class Settings extends AppCompatDialogFragment implements SettingsInterfa
     private TextView countKm;
     private SeekBar seekBar;
     private Button okButton;
-    private int count;
+    private CheckBox checkBox;
     private String TAG = "sett_tag";
-    private boolean rb_changer = true;
+
+    private int count;
+
+    private boolean rb_changer;
+    private boolean optChecked;
 
     public Settings(){}
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.popup, container);
+        View view = inflater.inflate(R.layout.popup_settings, container);
 
-        countKm = (TextView) view.findViewById(R.id.countKm);
+        countKm = view.findViewById(R.id.countKm);
         String text = String.valueOf(count) + " км";
         countKm.setText(text);
 
-        seekBar = (SeekBar) view.findViewById(R.id.seekBar);
+        seekBar = view.findViewById(R.id.seekBar);
         seekBar.setProgress(count);
 
         seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -61,8 +61,8 @@ public class Settings extends AppCompatDialogFragment implements SettingsInterfa
             }
         });
 
-        rb1 = (RadioButton) view.findViewById(R.id.RB_1);
-        rb2 = (RadioButton) view.findViewById(R.id.RB_2);
+        rb1 = view.findViewById(R.id.RB_1);
+        rb2 = view.findViewById(R.id.RB_2);
         if (rb_changer)
             rb1.setChecked(true);
         else {
@@ -90,14 +90,17 @@ public class Settings extends AppCompatDialogFragment implements SettingsInterfa
         });
 
 
-        okButton = (Button) view.findViewById(R.id.OK_Button);
+        checkBox = view.findViewById(R.id.checkBox);
+        checkBox.setChecked(optChecked);
 
+
+        okButton = view.findViewById(R.id.OK_Button);
         okButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 SettingsInterface activity = (SettingsInterface) getActivity();
                 try {
-                    activity.stopSettings(rb_changer, count);
+                    activity.actSettings(rb_changer, checkBox.isChecked(), count);
                 } catch (Exception e) {
                     Log.e(TAG, e.getLocalizedMessage());
                     e.printStackTrace();
@@ -111,8 +114,9 @@ public class Settings extends AppCompatDialogFragment implements SettingsInterfa
 
 
     @Override
-    public void stopSettings(boolean rb_changerI, int countI) {
+    public void actSettings(boolean rb_changerI, boolean checkedI, int countI) {
         rb_changer = rb_changerI;
         count = countI;
+        optChecked = checkedI;
     }
 }
