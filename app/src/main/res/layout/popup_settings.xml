@@ -17,7 +17,7 @@
         android:layout_marginEnd="15dp">
 
         <TextView
-            android:id="@+id/popup_text_view"
+            android:id="@+id/settingsTextView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/popup_title"
@@ -32,18 +32,18 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/all_places_item"
-            android:theme="@style/MyRadioButton"
+            android:theme="@style/DefaultElement"
             android:layout_marginStart="5dp"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <RadioButton
             android:id="@+id/RB_2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/on_distance_item"
-            android:theme="@style/MyRadioButton"
+            android:theme="@style/DefaultElement"
             android:layout_marginStart="5dp"
-            android:textSize="15sp" />
+            android:textSize="16sp" />
 
         <TextView
             android:id="@+id/countKm"
@@ -63,27 +63,68 @@
             android:layout_marginTop="10dp"
             android:visibility="gone"
             android:max="1000"
-            android:theme="@style/MyRadioButton" />
+            android:theme="@style/DefaultElement" />
+
+        <Switch
+            android:id="@+id/settingsSwitch"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/DefaultElement"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="8dp"
+            android:textSize="17sp"
+            android:text="Сортировка по типу" />
 
         <CheckBox
-            android:id="@+id/checkBox"
-            android:layout_width="wrap_content"
+            android:id="@+id/settingsCheckBoxMonument"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:theme="@style/MySeekBar"
-            android:layout_marginStart="6dp"
-            android:layout_marginTop="10dp"
-            android:text="Включить оптимизацию"
-            android:textSize="15sp"/>
+            android:theme="@style/MonumentElement"
+            android:layout_marginTop="5dp"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:text="Здания/Памятники" />
+
+        <CheckBox
+            android:id="@+id/settingsCheckBoxNature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/NatureElement"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:text="Природа" />
+
+        <CheckBox
+            android:id="@+id/settingsCheckBoxView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/ViewElement"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:text="Красивые виды" />
+
+        <CheckBox
+            android:id="@+id/settingsCheckBoxOther"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:theme="@style/OtherElement"
+            android:layout_marginStart="10dp"
+            android:visibility="gone"
+            android:textSize="16sp"
+            android:text="Другое" />
 
         <Button
-            android:id="@+id/OK_Button"
+            android:id="@+id/settingsOkButton"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="50dp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="5dp"
             android:layout_marginStart="5dp"
             android:layout_gravity="center_horizontal"
-            android:theme="@style/MyButton"
+            android:theme="@style/DefaultButton"
             android:textColor="@color/White"
             android:text="OK" />
 

@@ -3,6 +3,11 @@
     <string name="title_activity_maps">Silkway</string>
     <string name="add_place_item">Добавить место</string>
     <string name="delete_place_item">Удалить место</string>
+    <string name="login_item">Выход</string>
+    <string name="loginText"><u><b>Вход</b></u></string>
+    <string name="loginMainText">               Вход               </string>
+    <string name="registerText"><u><b>Регистрация</b></u></string>
+    <string name="registerMainText">          Регистрация          </string>
     <string name="settings_item">Настройки</string>
     <string name="popup_title">Отображение объектов:</string>
     <string name="all_places_item">На всей карте</string>

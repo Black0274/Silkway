@@ -16,18 +16,19 @@
             android:layout_marginEnd="15dp">
 
             <TextView
-                android:id="@+id/settingsTextView"
-                android:layout_width="wrap_content"
+                android:id="@+id/loginTextViewMain"
+                android:layout_width="210dp"
                 android:layout_height="wrap_content"
-                android:text="        Введите текст        "
+                android:text="Вход"
                 android:textSize="20sp"
                 android:gravity="center"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="5dp"
                 android:layout_marginBottom="8dp"
-                android:textColor="@color/Black"/>
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/Black" />
 
             <TextView
-                android:id="@+id/addPlaceTextViewError"
+                android:id="@+id/loginTextViewError"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="15sp"
@@ -37,17 +38,17 @@
                 android:text="TextView" />
 
             <TextView
-                android:id="@+id/addPlaceTextViewName"
+                android:id="@+id/loginTextViewName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="2dp"
                 android:layout_marginTop="5dp"
-                android:text="Название места:"
+                android:text="Логин:"
                 android:textSize="15sp"
                 android:textColor="@color/Black"/>
 
             <EditText
-                android:id="@+id/addPlaceEditTextName"
+                android:id="@+id/loginEditTextName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
@@ -57,66 +58,39 @@
             </EditText>
 
             <TextView
-                android:id="@+id/addPlaceTextViewDescription"
+                android:id="@+id/loginTextViewDescription"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_marginStart="2dp"
-                android:text="Описание:"
+                android:text="Пароль:"
                 android:textSize="15sp"
                 android:textColor="@color/Black" />
 
             <EditText
-                android:id="@+id/addPlaceEditTextDescription"
+                android:id="@+id/loginEditTextPassword"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:imeOptions="actionDone"
-                android:inputType="textPersonName"
+                android:inputType="textPassword"
                 android:backgroundTint= "@color/DodgerBlue"
                 android:textCursorDrawable="@drawable/color_cursor">
             </EditText>
 
             <TextView
-                android:id="@+id/addPlaceTextViewType"
+                android:id="@+id/loginTextViewMode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:layout_marginStart="2dp"
                 android:layout_marginBottom="5dp"
-                android:text="Тип:"
+                android:layout_marginStart="6dp"
                 android:textSize="15sp"
-                android:textColor="@color/Black" />
-
-            <RadioButton
-                android:id="@+id/addPlaceRbMonument"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/MonumentElement"
-                android:text="Здание/Памятник" />
-
-            <RadioButton
-                android:id="@+id/addPlaceRbNature"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/NatureElement"
-                android:text="Природа" />
-
-            <RadioButton
-                android:id="@+id/addPlaceRbBeautifulView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/ViewElement"
-                android:text="Красивый вид" />
-
-            <RadioButton
-                android:id="@+id/addPlaceRbOther"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:theme="@style/OtherElement"
-                android:text="Другое" />
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/DodgerBlue"
+                android:text="@string/registerText" />
 
             <Button
-                android:id="@+id/addPlaceOkButton"
+                android:id="@+id/loginOkButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"

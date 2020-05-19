@@ -8,15 +8,32 @@
         android:icon="@drawable/baseline_add_location_white_36"
         android:title="@string/add_place_item"
         app:showAsAction="ifRoom"
-        android:onClick="addPlaceClick"/>
+        android:onClick="addPlaceClick" />
 
     <item
         android:id="@+id/item_delete_place"
         android:icon="@drawable/baseline_delete_forever_white_36"
         android:title="@string/delete_place_item"
         app:showAsAction="ifRoom"
-        android:onClick="deletePlaceClick"
-        />
+        android:onClick="deletePlaceClick" />
+
+    <item
+        android:id="@+id/item_exit"
+        android:title="@string/login_item"
+        app:showAsAction="ifRoom"
+        android:onClick="loginClick" />
+
+    <item
+        android:id="@+id/item_save"
+        android:title="Сохранить маршрут"
+        app:showAsAction="ifRoom"
+        android:onClick="saveClick" />
+
+    <item
+        android:id="@+id/item_load"
+        android:title="Загрузить маршрут"
+        app:showAsAction="ifRoom"
+        android:onClick="loadClick" />
 
     <item
         android:id="@+id/item_settings"

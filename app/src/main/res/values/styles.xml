@@ -16,20 +16,38 @@
         <item name="android:title">Silkway</item>
     </style>
 
-    <style name="MyRadioButton" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/DodgerBlue</item>
-        <item name="colorControlActivated">@color/DodgerBlue</item>
-    </style>
-
-    <style name="MySeekBar" parent="Theme.AppCompat.Light">
-        <item name="colorControlNormal">@color/DodgerBlue</item>
-        <item name="colorControlActivated">@color/DodgerBlue</item>
-    </style>
-
-    <style name="MyButton" parent="Theme.AppCompat.Light">
+    <style name="DefaultButton" parent="Theme.AppCompat.Light">
         <item name="colorControlHighlight">@color/PowdedBlue</item>
         <item name="colorButtonNormal">@color/DodgerBlue</item>
+    </style>
 
+    <style name="DefaultElement" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/DodgerBlue</item>
+        <item name="colorControlActivated">@color/DodgerBlue</item>
+    </style>
+
+    <style name="MonumentElement" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/Azure</item>
+        <item name="colorControlActivated">@color/Azure</item>
+    </style>
+
+    <style name="NatureElement" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/Green</item>
+        <item name="colorControlActivated">@color/Green</item>
+    </style>
+
+    <style name="ViewElement" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/Yellow</item>
+        <item name="colorControlActivated">@color/Yellow</item>
+    </style>
+
+    <style name="OtherElement" parent="Theme.AppCompat.Light">
+        <item name="colorControlNormal">@color/Orange</item>
+        <item name="colorControlActivated">@color/Orange</item>
+    </style>
+
+    <style name="DefaultRatingBar"
+        parent="android:style/Widget.Material.RatingBar.Small">
     </style>
 
 </resources>

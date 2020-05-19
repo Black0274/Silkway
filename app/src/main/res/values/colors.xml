@@ -10,4 +10,8 @@
     <color name="DodgerBlue">#1E90FF</color>
     <color name="PowdedBlue">#B0E0E6</color>
     <color name="White">#FFFFFF</color>
+    <color name="Azure"> #007FFF</color>
+    <color name="Green">#03C03C</color>
+    <color name="Yellow">#FFDF00</color>
+    <color name="Orange">#FF8C69</color>
 </resources>

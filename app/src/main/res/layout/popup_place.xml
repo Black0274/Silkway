@@ -1,0 +1,105 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="5dp">
+
+
+        <RadioGroup
+            android:id="@+id/radioGroup"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginBottom="10dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginEnd="15dp">
+
+            <TextView
+                android:id="@+id/placeTextViewTitle"
+                android:layout_width="wrap_content"
+                android:minWidth="210dp"
+                android:layout_height="wrap_content"
+                android:text="Place"
+                android:textSize="24sp"
+                android:gravity="center"
+                android:layout_marginStart="5dp"
+                android:layout_marginBottom="8dp"
+                android:layout_gravity="center_horizontal"
+                android:textColor="@color/Black" />
+
+            <TextView
+                android:id="@+id/placeTextViewError"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="15sp"
+                android:visibility="gone"
+                android:textColor="@color/colorAccent"
+                android:layout_marginStart="20dp"
+                android:layout_gravity="center_horizontal"
+                android:text="TextView" />
+
+            <RatingBar
+                android:id="@+id/placeRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyleIndicator"
+                android:isIndicator="false"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:layout_gravity="center_horizontal" />
+
+            <TextView
+                android:id="@+id/placeTextViewRating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/Black"
+                android:layout_gravity="center_horizontal"
+                android:text="Оценили: 4                      4.4" />
+
+            <TextView
+                android:id="@+id/placeTextViewDescriptionStatic"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="start"
+                android:textSize="14sp"
+                android:textColor="@color/Black"
+                android:text="Описание:" />
+
+            <TextView
+                android:id="@+id/placeTextViewDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:textSize="18sp"
+                android:textColor="@color/Black"
+                android:text="Замечательное место для отдыха с семьёй!" />
+
+            <TextView
+                android:id="@+id/placeTextViewAuthor"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textSize="14sp"
+                android:textColor="@color/Black"
+                android:layout_marginTop="10dp"
+                android:layout_marginStart="10dp"
+                android:layout_gravity="start"
+                android:text="Добавлено пользователем anna" />
+
+            <Button
+                android:id="@+id/placeAddButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginStart="5dp"
+                android:layout_gravity="center_horizontal"
+                android:theme="@style/DefaultButton"
+                android:textColor="@color/White"
+                android:text="Добавить в мой список" />
+
+        </RadioGroup>
+
+</LinearLayout>
