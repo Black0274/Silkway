@@ -18,7 +18,5 @@ public class Rest {
     public static final String PLACE_ADD = "http://64.225.79.145:8080/Silkway/place";                      // POST
     public static final String PLACE_GET_ALL = "http://64.225.79.145:8080/Silkway/place/all";              // GET
     public static final String PLACE_ADD_RATING = "http://64.225.79.145:8080/Silkway/place/rating";        // POST
-    public static final String PLACE_GET_LIST = "http://64.225.79.145:8080/Silkway/place/list";            // GET
-    public static final String PLACE_ADD_AT_LIST = "http://64.225.79.145:8080/Silkway/place/list";         // POST
-    public static final String PLACE_DELETE_FROM_LIST = "http://64.225.79.145:8080/Silkway/place/list";    // DELETE
+    public static final String PLACE_LIST = "http://64.225.79.145:8080/Silkway/place/list";                // GET POST DELETE
 }
